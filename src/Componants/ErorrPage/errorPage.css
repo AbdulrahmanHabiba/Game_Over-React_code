@@ -1,0 +1,111 @@
+#notfound * {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+  #notfound {
+    position: relative;
+    height: 70vh;
+    background-color: #32383e07 !important;
+
+  }
+  
+  #notfound .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  
+  .notfound {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    line-height: 1.4;
+  }
+  
+  .notfound .notfound-404 {
+    height: 190px;
+  }
+  
+  .notfound .notfound-404 h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 146px;
+    font-weight: 700;
+    margin: 0px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+
+    /* color: #232323; */
+  }
+  
+  .notfound .notfound-404 h1 > span {
+    width: 120px;
+    height: 120px;
+  animation: spooky 2s alternate infinite linear;
+  color: #528cce;
+  display: inline-block;
+}
+@keyframes spooky {
+    from {
+      transform: translatey(0.15em) scaley(0.95);
+    }
+    to {
+      transform: translatey(-0.15em);
+    }
+  }
+  
+  .notfound h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    color: #232323;
+    color: #528cce;
+
+  }
+  
+  .notfound p {
+    margin-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #787878;
+    font-weight: 300;
+    color: #fff;
+  }
+  
+  .notfound a {
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    padding: 12px 30px;
+    font-weight: 700;
+    background-color: #ff002bc2;
+    color: #fff;
+    border-radius: 15px;
+    text-decoration: none;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+  }
+  
+  .notfound a:hover {
+    /* background-color: transparent; */
+    /* border:#ff002bc2 3px solid ; */
+    opacity: 0.8;
+    color: #fff;
+    /* color:#fdffffe0 ; */
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .notfound .notfound-404 {
+      height: 115px;
+    }
+    .notfound .notfound-404 h1 {
+      font-size: 86px;
+    }
+    .notfound .notfound-404 h1>span {
+      width: 86px;
+      height: 86px;
+    }
+  }
+  
