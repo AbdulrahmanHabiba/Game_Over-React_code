@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import main_img from "../../assets/login_img.jpg"
 import logo from "../../assets/logo.png"
@@ -6,8 +6,8 @@ import logo from "../../assets/logo.png"
 import Joi from 'joi'
 import Axios from 'axios'
 
-export default function Login({saveUserData}) {
-  let navigate = useNavigate() ;
+export default function Login({ saveUserData }) {
+  let navigate = useNavigate();
   const [user, setUser] = useState(
     {
       email: "",
@@ -17,14 +17,21 @@ export default function Login({saveUserData}) {
   const [errorApi, setErrorApi] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorJoi, setErrorJoi] = useState([])
+  const [showModal, setShowModal] = useState(true);
+
+  const navigateHome = () => {
+    setShowModal(false);
+    navigate('/home');
+  };
+
   async function sendUserDataToAPi() {
     let { data } = await Axios.post('https://sticky-note-fe.vercel.app/signin', user)
     if (data.message === "success") {
-      localStorage.setItem('userToken' , data.token) 
+      localStorage.setItem('userToken', data.token)
       saveUserData();
-      setLoading(false) ;
-      navigate('/home') ;
-      
+      setLoading(false);
+      navigate('/home');
+
     }
     else {
       setErrorApi(data.message)
@@ -72,10 +79,17 @@ export default function Login({saveUserData}) {
     )
   }
 
-
-
   return (
     <>
+      {showModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: '#fff', padding: '2rem', borderRadius: '10px', textAlign: 'center', minWidth: '300px' }}>
+            <h4 style={{ color: '#222' }}>Login is temporarily disabled</h4>
+            <p style={{ color: '#555' }}>You cannot login at the moment. Please return to the homepage.</p>
+            <button onClick={navigateHome} style={{ marginTop: '1rem', padding: '0.5rem 1.5rem', background: '#4799eb', color: '#fff', border: 'none', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer' }}>Go to Home</button>
+          </div>
+        </div>
+      )}
       <div className="login mb-4 text-white">
         <div className="container pt-5  ">
           <div className="row g-0">

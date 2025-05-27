@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Axios from 'axios'
 import Joi from 'joi'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import main_img from "../../assets/login_img.jpg"
 export default function Rejester() {
@@ -20,6 +20,7 @@ export default function Rejester() {
   const [errorApi, setErrorApi] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorJoi, setErrorJoi] = useState([])
+  const [showModal, setShowModal] = useState(true);
 
   async function sendUserDataToAPi() {
     let { data } = await Axios.post('https://sticky-note-fe.vercel.app/signup', user)
@@ -66,7 +67,7 @@ export default function Rejester() {
   }
   let validation = validateRegisterForm()
   function submitRegisterForm(e) {
-    
+
     e.preventDefault() // disable default prevents of Form // disable auto refresh
     setLoading(true)
     if (validation.error) {
@@ -82,7 +83,7 @@ export default function Rejester() {
   // <div className="alert alert-warning py-0 mt-1">
   //   </div>
 
- function displayJoiError(labelName) {
+  function displayJoiError(labelName) {
     return (
       <div className=" rounded  rounded-1 px-3 text-bg-light text-danger mt-1">
         {errorJoi.filter((error) => error.context.label === labelName)[0]?.message}
@@ -90,11 +91,22 @@ export default function Rejester() {
     )
   }
 
-
-
+  const navigateHome = () => {
+    setShowModal(false);
+    navigate('/home');
+  };
 
   return (
     <>
+      {showModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.5)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ background: '#fff', padding: '2rem', borderRadius: '10px', textAlign: 'center', minWidth: '300px' }}>
+            <h4 style={{ color: '#222' }}>Registration is temporarily disabled</h4>
+            <p style={{ color: '#555' }}>You cannot register at the moment. Please return to the homepage.</p>
+            <button onClick={navigateHome} style={{ marginTop: '1rem', padding: '0.5rem 1.5rem', background: '#4799eb', color: '#fff', border: 'none', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer' }}>Go to Home</button>
+          </div>
+        </div>
+      )}
       <div className="login mb-4 text-white">
         <div className="container pt-5  ">
           <div className="row g-0">

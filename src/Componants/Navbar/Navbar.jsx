@@ -1,15 +1,16 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png"
-export default function Navbar({ userData, logOut }) {
+
+export default function Navbar({ userData , logOut }) {
   let navigate = useNavigate();
   function warning() {
-    if (window.confirm("Are you sure ?") == true) {
+    if (window.confirm("Are you sure ?") === true) {
       logOut();
       navigate('/login')
     }
   }
-
+  userData = "0"
   return (
     <>
       <nav className="navbar navbar-expand-lg  shadow navbar-dark">
@@ -67,11 +68,11 @@ export default function Navbar({ userData, logOut }) {
                     </li>
                   </ul>
                 </li>
-              
+
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    href=""
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -163,7 +164,7 @@ export default function Navbar({ userData, logOut }) {
                     </li>
                     <li>
                       <Link className="dropdown-item" to="category/flight">
-                      flight
+                        flight
                       </Link>
                     </li>
                   </ul>
@@ -174,7 +175,7 @@ export default function Navbar({ userData, logOut }) {
             )}
 
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              {userData ? (
+              {userData && userData !== "0" ? (
                 <li>
                   <Link className="nav-link px-3 mx-1" to="profile">
                     Profile
@@ -183,28 +184,24 @@ export default function Navbar({ userData, logOut }) {
               ) : (
                 ""
               )}
-              {!userData ? (
-                <li>
-                  <Link
-                    className=" btn  btn-outline-success px-3 mx-1"
-                    to="login"
-                  >
-                    Login
-                  </Link>
-                </li>
-              ) : (
-                ""
-              )}
+              <li>
+                <Link
+                  className=" btn  btn-outline-success px-3 mx-1"
+                  to="login"
+                >
+                  Login
+                </Link>
+              </li>
 
               <li className="">
-                {userData ? (
+                {userData && userData !== "0" && (
                   <div
                     onClick={warning}
                     className="btn btn-outline-info px-3 mx-1"
                   >
                     log out
                   </div>
-                ) : (
+                )   (
                   <Link
                     className="btn btn-outline-info px-3 mx-1"
                     to="register"
@@ -212,7 +209,6 @@ export default function Navbar({ userData, logOut }) {
                     Join Free
                   </Link>
                 )}
-                {/* <div onClick={warning} className="btn btn-outline-info px-3 mx-1">{userData? "log out" : "Join Free"} </div> */}
               </li>
             </ul>
           </div>
