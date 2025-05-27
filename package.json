@@ -1,7 +1,7 @@
 {
   "name": "app2",
   "version": "0.1.0",
-  "homepage": "https://AbdulrahmanHabiba.github.io/Game_over-React",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
